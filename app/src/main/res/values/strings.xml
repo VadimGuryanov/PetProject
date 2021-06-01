@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PetProject</string>
+    <string name="name_text_hint">Rick D-99</string>
+    <string name="status_and_species_text_hint">Dead - Human - Male</string>
+    <string name="gender_text_hint">Male</string>
+    <string name="origin_text_hint">Earth (D-99)</string>
+    <string name="origin_text_title">Origin:</string>
+    <string name="last_location_text_title">Last known location:</string>
+    <string name="last_location_text_hint">Citadel of Ricks</string>
+    <string name="status_and_species_mask">%1$s - %2$s - %3$s</string>
 </resources>
