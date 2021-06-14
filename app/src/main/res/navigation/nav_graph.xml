@@ -39,6 +39,10 @@
         android:name="kpfu.itis.petproject.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details">
+        <argument
+            android:name="userId"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 
 </navigation>

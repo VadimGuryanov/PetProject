@@ -18,11 +18,11 @@ import kpfu.itis.petproject.adapter.CharactersAdapter
 import kpfu.itis.petproject.utils.functions.provideViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
+import org.kodein.di.android.x.kodein
 
 class CharactersFragment : Fragment(R.layout.fragment_characters), KodeinAware {
 
-    override val kodein: Kodein by closestKodein()
+    override val kodein: Kodein by kodein()
 
     private val viewModel: CharactersViewModel by provideViewModel()
 
@@ -39,11 +39,8 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), KodeinAware {
     private fun initCharactersTransactionStream() {
         charactersJob?.cancel()
         charactersJob = lifecycleScope.launch {
-            Log.e("ee", "ee")
             viewModel.characterStream.collectLatest {
-                Log.e("adaapter", adapter?.toString() ?: "null")
                 it.map {
-                    Log.e("daata", it.name)
                     it.name
                 }
                 adapter?.submitData(it)

@@ -1,6 +1,5 @@
 package kpfu.itis.petproject.api.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import kpfu.itis.petproject.api.Api
@@ -17,7 +16,6 @@ class CharacterFlowPagingSource(
         }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
-        Log.e("ee", "ee")
         val page = params.key ?: 1
         return try {
             api.getCharacters(page).results.toLoadResult(page)

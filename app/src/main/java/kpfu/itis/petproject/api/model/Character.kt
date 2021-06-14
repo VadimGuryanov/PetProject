@@ -29,12 +29,6 @@ data class Character(
     var url: String
 ) {
 
-//    val status = when (statusStr) {
-//        ALIVE -> Status.ALIVE
-//        DEAD -> Status.DEAD
-//        else -> Status.UNKNOWN
-//    }
-
     companion object {
 
         private const val ALIVE = "Alive"
