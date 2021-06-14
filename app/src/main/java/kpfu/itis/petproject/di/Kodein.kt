@@ -12,9 +12,9 @@ import org.kodein.di.generic.singleton
 
 fun diKodein(app: Application = App.instance) = Kodein.lazy {
     import(appModule(app))
-    import(navigateModule(app.applicationContext))
     import(netModule())
     import(modelModule())
     import(viewModelModule())
+    import(repModule())
     bind<ViewModelProvider.Factory>() with singleton { ViewModelFactory(this.dkodein) }
 }

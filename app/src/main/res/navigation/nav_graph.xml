@@ -24,5 +24,21 @@
         android:name="kpfu.itis.petproject.list.CharactersFragment"
         android:label="fragment_character"
         tools:layout="@layout/fragment_characters">
+
+        <action android:id="@+id/action_charactersFragment_to_detailsFragment"
+            app:destination="@+id/detailsFragment">
+            <argument
+                android:name="userId"
+                app:argType="integer"
+                android:defaultValue="1" />
+        </action>
     </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="kpfu.itis.petproject.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details">
+    </fragment>
+
 </navigation>

@@ -1,14 +1,19 @@
 package kpfu.itis.petproject.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.paging.map
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_characters.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kpfu.itis.petproject.R
+import kpfu.itis.petproject.adapter.CharacterLoadStateAdapter
 import kpfu.itis.petproject.adapter.CharactersAdapter
 import kpfu.itis.petproject.utils.functions.provideViewModel
 import org.kodein.di.Kodein
@@ -34,14 +39,23 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), KodeinAware {
     private fun initCharactersTransactionStream() {
         charactersJob?.cancel()
         charactersJob = lifecycleScope.launch {
+            Log.e("ee", "ee")
             viewModel.characterStream.collectLatest {
+                Log.e("adaapter", adapter?.toString() ?: "null")
+                it.map {
+                    Log.e("daata", it.name)
+                    it.name
+                }
                 adapter?.submitData(it)
             }
         }
     }
-
     private fun initView() {
-        rv_rates_star_list.adapter = CharactersAdapter { }
-    }
+        adapter = CharactersAdapter(Glide.with(this)) {
+            val action = CharactersFragmentDirections.actionCharactersFragmentToDetailsFragment(it)
+            findNavController().navigate(action)
+        }
+        rv_rates_star_list.adapter = adapter?.withLoadStateFooter(CharacterLoadStateAdapter())
 
+    }
 }

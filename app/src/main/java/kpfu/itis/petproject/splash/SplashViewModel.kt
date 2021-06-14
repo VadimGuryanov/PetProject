@@ -1,19 +1,21 @@
 package kpfu.itis.petproject.splash
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kpfu.itis.petproject.navigate.Router
 
-class SplashViewModel(
-    private val router: Router
-) : ViewModel() {
+class SplashViewModel : ViewModel() {
+
+    private val _navToCharacters: MutableLiveData<Boolean> = MutableLiveData()
+    val navToCharacters: LiveData<Boolean> =  _navToCharacters
 
     fun navigateToCharacters() {
         viewModelScope.launch {
             delay(1000)
-            router.navigateToCharacters()
+            _navToCharacters.postValue(true)
         }
     }
 }

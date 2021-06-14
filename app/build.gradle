@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply from: 'dependencies.gradle'
 
 android {
@@ -76,6 +77,14 @@ dependencies {
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.5.5'
     implementation 'org.kodein.di:kodein-di-framework-android-x:6.5.5'
     // endregion
+
+    // region Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01"
+    // endregion
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
