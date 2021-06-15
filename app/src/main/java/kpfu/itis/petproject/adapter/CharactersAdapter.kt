@@ -13,7 +13,7 @@ class CharactersAdapter(
 ) : PagingDataAdapter<Character, RecyclerView.ViewHolder>(
     object : DiffUtil.ItemCallback<Character>() {
         override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean =
-            oldItem == newItem
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean =
             oldItem == newItem

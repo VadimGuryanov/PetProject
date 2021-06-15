@@ -2,10 +2,10 @@ package kpfu.itis.petproject.details
 
 import android.util.Log
 import androidx.lifecycle.*
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kpfu.itis.petproject.api.model.*
+import kpfu.itis.petproject.model.Repository
 
 class DetailsViewModel (
     private val repository: Repository

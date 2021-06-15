@@ -1,4 +1,4 @@
-package kpfu.itis.petproject.details
+package kpfu.itis.petproject.model
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

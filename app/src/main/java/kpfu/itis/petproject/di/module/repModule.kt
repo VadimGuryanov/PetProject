@@ -1,6 +1,6 @@
 package kpfu.itis.petproject.di.module
 
-import kpfu.itis.petproject.details.Repository
+import kpfu.itis.petproject.model.Repository
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance

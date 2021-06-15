@@ -40,19 +40,16 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), KodeinAware {
         charactersJob?.cancel()
         charactersJob = lifecycleScope.launch {
             viewModel.characterStream.collectLatest {
-                it.map {
-                    it.name
-                }
                 adapter?.submitData(it)
             }
         }
     }
+
     private fun initView() {
         adapter = CharactersAdapter(Glide.with(this)) {
             val action = CharactersFragmentDirections.actionCharactersFragmentToDetailsFragment(it)
             findNavController().navigate(action)
         }
         rv_rates_star_list.adapter = adapter?.withLoadStateFooter(CharacterLoadStateAdapter())
-
     }
 }

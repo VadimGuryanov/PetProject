@@ -8,9 +8,7 @@ import kpfu.itis.petproject.api.Api
 import kpfu.itis.petproject.api.model.Character
 import kpfu.itis.petproject.api.paging.CharacterFlowPagingSource
 
-class CharacterModel(
-    private val api: Api
-) {
+class CharacterModel(private val api: Api) {
 
     fun getCharacters(): Flow<PagingData<Character>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE),

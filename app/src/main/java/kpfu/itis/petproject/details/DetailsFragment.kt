@@ -43,11 +43,13 @@ class DetailsFragment: Fragment(R.layout.fragment_details), KodeinAware {
             .onEach {
                 tv_json.text = ("${tv_json.text}----${it}")
             }
+            .launchIn(lifecycleScope)
 
         viewModel.locations.flowWithLifecycle(lifecycle)
             .onEach {
                 tv_json.text = ("${tv_json.text}----${it}")
             }
+            .launchIn(lifecycleScope)
     }
 
 }
