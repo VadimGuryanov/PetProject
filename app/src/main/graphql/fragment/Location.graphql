@@ -1,0 +1,10 @@
+fragment LocationGqlFragment on Location {
+    created
+    dimension
+    id
+    name
+    residents {
+        ...CharacterGqlFragment
+    }
+    type
+}

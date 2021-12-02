@@ -1,0 +1,10 @@
+fragment EpisodeGqlFragment on Episode {
+    air_date
+    characters {
+        ...CharacterGqlFragment
+    }
+    created
+    episode
+    id
+    name
+}

@@ -1,0 +1,12 @@
+{
+  "name": "GraphQL Schema",
+  "extensions": {
+    "endpoints": {
+      "Staging": {
+        "url": "https://rickandmortyapi.com/graphql",
+        "schemaPath": "schema.json",
+        "introspect": false
+      }
+    }
+  }
+}
