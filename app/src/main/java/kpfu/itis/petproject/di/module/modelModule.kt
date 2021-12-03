@@ -9,6 +9,6 @@ import org.kodein.di.generic.provider
 fun modelModule() = Kodein.Module(name = "modelModule") {
 
     bind<CharacterModel>() with provider {
-        CharacterModel(instance())
+        CharacterModel(instance(), instance(tag = APOLLO_CLIENT), instance())
     }
 }

@@ -1,9 +1,0 @@
-query AndroidCharacters(
-    $page: Int = 0
-) {
-    characters(
-        page: $page
-    ) {
-        ...CharactersGqlFragment
-    }
-}

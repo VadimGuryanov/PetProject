@@ -16,5 +16,6 @@ fun diKodein(app: Application = App.instance) = Kodein.lazy {
     import(modelModule())
     import(viewModelModule())
     import(repModule())
+    import(mapperModule())
     bind<ViewModelProvider.Factory>() with singleton { ViewModelFactory(this.dkodein) }
 }

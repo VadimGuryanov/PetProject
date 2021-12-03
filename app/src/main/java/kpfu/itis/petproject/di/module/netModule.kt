@@ -1,5 +1,6 @@
 package kpfu.itis.petproject.di.module
 
+import com.apollographql.apollo.ApolloClient
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -15,11 +16,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Modifier
 
+const val APOLLO_CLIENT = "pet_project"
+
 fun netModule() = Kodein.Module(name = "netModule") {
     import(httpModule())
 
     bind<Gson>() with singleton { provideGson() }
     bind<Retrofit>() with singleton { provideRetrofit(instance(tag = "rest"), instance()) }
+
+    bind<ApolloClient>(tag = APOLLO_CLIENT) with singleton { provideApolloClient(instance(tag = "graphql")) }
 
     bind<Api>() with singleton { instance<Retrofit>().create(Api::class.java) }
 }
@@ -34,4 +39,10 @@ private fun provideRetrofit(client: OkHttpClient, gson: Gson): Retrofit =
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(client)
+        .build()
+
+private fun provideApolloClient(client: OkHttpClient): ApolloClient =
+    ApolloClient.builder()
+        .serverUrl(BuildConfig.ENDPOINT_JOB)
+        .okHttpClient(client)
         .build()

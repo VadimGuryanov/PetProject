@@ -34,6 +34,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initCharactersTransactionStream()
+        viewModel.fetchCities()
     }
 
     private fun initCharactersTransactionStream() {

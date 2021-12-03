@@ -19,6 +19,10 @@ fun httpModule() = Kodein.Module(name = "httpModule") {
     bind<OkHttpClient>(tag = "rest") with singleton {
         provideOkHttpClient(loggingInterceptor = instance(tag = "logging"))
     }
+    
+    bind<OkHttpClient>(tag = "graphql") with singleton {
+        provideOkHttpClient(loggingInterceptor = instance(tag = "logging"))
+    }
 }
 
 private fun provideOkHttpClient(

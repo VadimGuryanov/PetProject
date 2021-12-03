@@ -1,6 +1,0 @@
-fragment InfoGqlFragment on Info {
-    count
-    next
-    pages
-    prev
-}

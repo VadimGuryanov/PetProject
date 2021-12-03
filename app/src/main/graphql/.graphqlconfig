@@ -3,7 +3,7 @@
   "extensions": {
     "endpoints": {
       "Staging": {
-        "url": "https://rickandmortyapi.com/graphql",
+        "url": "https://api.graphql.jobs/",
         "schemaPath": "schema.json",
         "introspect": false
       }

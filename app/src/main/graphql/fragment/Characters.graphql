@@ -1,8 +1,0 @@
-fragment CharactersGqlFragment on Characters {
-    info {
-        ...InfoGqlFragment
-    }
-    results {
-        ...CharacterGqlFragment
-    }
-}
