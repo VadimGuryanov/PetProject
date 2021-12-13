@@ -1,27 +1,62 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.github.triplet.play'
+    id 'com.google.firebase.appdistribution'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "kpfu.itis.petproject"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        debug {
+            storeFile file("$rootDir/keystore.jks")
+            storePassword "petpassword"
+            keyAlias "petalias"
+            keyPassword "petpassword"
+        }
+        release {
+            def keystorePropertiesFile = rootProject.file("secrets/keystore.properties")
+            def keystoreProperties = new Properties()
+            if (keystorePropertiesFile.exists())
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            storeFile file("$rootDir/keystore-release.jks")
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            firebaseAppDistribution {
+                appId = "1:1081602325724:android:880d1941a143e24381c819"
+                releaseNotes="Release Notes"
+                testers="gvadimmonstors3@gmail.com"
+            }
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -29,6 +64,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+play {
+    track = "alpha"
+    userFraction = 0.1
+    releaseStatus = "inProgress"
+    defaultToAppBundles = true
+    serviceAccountCredentials = rootProject.file("secrets/google-play-key.json")
 }
 
 dependencies {
@@ -41,4 +84,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
