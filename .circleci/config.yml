@@ -118,20 +118,6 @@ workflows:
           filters:
             tags:
               only: /^.*/
-      - linter:
-          requires:
-            - dependencies
-          filters:
-            tags:
-              only: /^.*/
-      - deploy_staging:
-          filters:
-            tags:
-              only: /^v\d+[.]\d+[.]\d+(-staging){0,1}$/
-            branches:
-              ignore: /^.*/
-          requires:
-            - linter
       - deploy_production:
           filters:
             tags:
@@ -139,4 +125,4 @@ workflows:
             branches:
               ignore: /^.*/
           requires:
-            - linter
+            - dependencies
