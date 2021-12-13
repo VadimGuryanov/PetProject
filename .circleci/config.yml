@@ -30,7 +30,7 @@ references:
   android_config: &android_config
     working_directory: *workspace
     docker:
-      - image: circleci/android:api-31
+      - image: circleci/android:api-30
     environment:
       TERM: dumb
       JAVA_OPTIONS: "-Xmx3200m -XX:+UnlockExperimentalVMOptions -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
