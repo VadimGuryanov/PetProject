@@ -1,0 +1,6 @@
+fragment CityGqlFragment on City {
+    id
+    name
+    slug
+    type
+}

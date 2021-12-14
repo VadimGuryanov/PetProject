@@ -1,0 +1,12 @@
+{
+  "name": "GraphQL Schema",
+  "extensions": {
+    "endpoints": {
+      "Staging": {
+        "url": "https://api.graphql.jobs/",
+        "schemaPath": "schema.json",
+        "introspect": false
+      }
+    }
+  }
+}
