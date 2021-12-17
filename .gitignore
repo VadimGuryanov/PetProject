@@ -9,3 +9,6 @@
 local.properties
 .idea/
 app/libs/
+
+secrets/google-play-key.json
+secrets/google-services.json
