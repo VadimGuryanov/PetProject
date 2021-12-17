@@ -4,6 +4,7 @@ plugins {
     id 'com.github.triplet.play'
     id 'com.google.firebase.appdistribution'
     id 'com.google.gms.google-services'
+    id 'io.gitlab.arturbosch.detekt'
 }
 
 android {
@@ -62,6 +63,7 @@ android {
                 testers="gvadimmonstors3@gmail.com"
             }
         }
+        production {}
     }
 
     compileOptions {
@@ -96,3 +98,17 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation "com.google.android.gms:play-services-location:19.0.0"
 }
+
+detekt {
+    toolVersion = "1.16.0"
+    input = files("src/main/java")
+    config = files("../config/detekt/detekt.yml")
+    parallel = true
+    reports {
+        txt.enabled = false
+        xml.enabled = false
+        html {
+            enabled = true
+            destination = file("build/reports/detekt/detekt.html")
+        }
+    }}

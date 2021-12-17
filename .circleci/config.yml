@@ -60,7 +60,7 @@ jobs:
       - *restore_cache
       - run:
           name: Run Checkstyle
-          command: ./gradlew detektAll
+          command: ./gradlew detekt
       - store_artifacts:
           path: app/build/reports/
           destination: /reports/
@@ -106,9 +106,21 @@ workflows:
           filters:
             tags:
               only: /^.*/
+      - check_style:
+          requires:
+            - dependencies
+          filters:
+            tags:
+              only: /^.*/
+      - linter:
+          requires:
+            - check_style
+          filters:
+            tags:
+              only: /^.*/
       - deploy_staging:
           filters:
             tags:
               only: /^v\d+[.]\d+[.]\d+(-staging){0,1}$/
           requires:
-            - dependencies
+            - linter
