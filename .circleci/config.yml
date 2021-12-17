@@ -52,12 +52,6 @@ jobs:
           command: ./gradlew androidDependencies
       - *save_cache
       - *persist_release_workspace
-      - store_artifacts:
-          path: app/build/outputs/bundle/
-          destination: /bundle/
-      - store_artifacts:
-          path: app/build/outputs/mapping/
-          destination: /mapping/
 
   check_style:
     <<: *android_config
@@ -89,6 +83,8 @@ jobs:
   deploy_staging:
     <<: *android_config
     steps:
+      - *attach_release_workspace
+      - *restore_cache
       - run:
           name: Build Staging Release Apk
           command: ./gradlew assembleStagingRelease --profile
