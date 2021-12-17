@@ -28,13 +28,6 @@ references:
       paths:
         - .
 
-  disable_pre_dexing: &disable_pre_dexing
-    run:
-      name: Disable Android pre dexing
-      command: |
-        mkdir -p ~/.gradle
-        cp .circleci/init.gradle ~/.gradle/init.gradle
-
   android_config: &android_config
     working_directory: *workspace
     docker:
@@ -50,7 +43,6 @@ jobs:
     steps:
       - checkout
       - *restore_cache
-      - *disable_pre_dexing
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
