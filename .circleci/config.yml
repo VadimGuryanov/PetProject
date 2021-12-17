@@ -2,7 +2,7 @@ version: 2
 references:
 
   cache_key: &cache_key
-    key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    key: cache-v1-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
 
   restore_cache: &restore_cache
     restore_cache:
@@ -33,9 +33,7 @@ references:
     docker:
       - image: circleci/android:api-30
     environment:
-      TERM: dumb
-      JAVA_OPTIONS: "-Xmx3200m -XX:+UnlockExperimentalVMOptions -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.util.concurrent.ForkJoinPool.common.parallelism=2"
-      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx3200m" -Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2 -Dkotlin.incremental=false -Dorg.gradle.caching=false -DokHttp.connectTimeout=60 -DokHttp.readTimeout=60'
+      JVM_OPTS: -Xmx3200m
 
 jobs:
   dependencies:
@@ -44,10 +42,19 @@ jobs:
       - checkout
       - *restore_cache
       - run:
-          name: Download Dependencies
+          name: Download dependencies
           command: ./gradlew androidDependencies
       - *save_cache
+      - run:
+          name: Gradle build (release)
+          command: ./gradlew bundleRelease
       - *persist_release_workspace
+      - store_artifacts:
+          path: app/build/outputs/bundle/
+          destination: /bundle/
+      - store_artifacts:
+          path: app/build/outputs/mapping/
+          destination: /mapping/
 
   check_style:
     <<: *android_config
@@ -79,8 +86,6 @@ jobs:
   deploy_staging:
     <<: *android_config
     steps:
-      - *attach_release_workspace
-      - *restore_cache
       - run:
           name: Build Staging Release Apk
           command: ./gradlew assembleStagingRelease --profile
@@ -90,24 +95,6 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/apk/
           destination: /apk/
-      - store_artifacts:
-          path: build/reports/profile/
-          destination: /profile/
-
-  deploy_production:
-    <<: *android_config
-    steps:
-      - *attach_release_workspace
-      - *restore_cache
-      - run:
-          name: Build and publish Production Release bundle
-          command: ./gradlew publishProductionReleaseBundle --profile
-      - store_artifacts:
-          path: app/build/outputs/apk/
-          destination: /apk/
-      - store_artifacts:
-          path: app/build/outputs/bundle/
-          destination: /bundle/
       - store_artifacts:
           path: build/reports/profile/
           destination: /profile/
@@ -124,11 +111,5 @@ workflows:
           filters:
             tags:
               only: /^v\d+[.]\d+[.]\d+(-staging){0,1}$/
-          requires:
-            - dependencies
-      - deploy_production:
-          filters:
-            tags:
-              only: /^v\d+[.]\d+[.]\d+$/
           requires:
             - dependencies
