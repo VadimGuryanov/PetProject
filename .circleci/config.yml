@@ -118,6 +118,12 @@ workflows:
           filters:
             tags:
               only: /^.*/
+      - deploy_staging:
+          filters:
+            tags:
+              only: /^v\d+[.]\d+[.]\d+(-staging){0,1}$/
+          requires:
+            - dependencies
       - deploy_production:
           filters:
             tags:

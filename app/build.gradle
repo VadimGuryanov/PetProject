@@ -43,17 +43,24 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            firebaseAppDistribution {
-                appId = "1:1081602325724:android:880d1941a143e24381c819"
-                releaseNotes="Release Notes"
-                testers="gvadimmonstors3@gmail.com"
-            }
         }
 
         debug {
             signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "environment"
+
+    productFlavors {
+        staging {
+            firebaseAppDistribution {
+                serviceCredentialsFile = "$rootDir/secrets/firebase-app-distribution.json"
+                releaseNotes="Release Notes"
+                testers="gvadimmonstors3@gmail.com"
+            }
         }
     }
 
