@@ -28,6 +28,11 @@ references:
       paths:
         - .
 
+  chmod_permissions: &chmod_permissions
+    run:
+      name: Chmod permissions
+      command: sudo chmod +x ./gradlew
+
   android_config: &android_config
     working_directory: *workspace
     docker:
@@ -41,6 +46,7 @@ jobs:
     steps:
       - checkout
       - *restore_cache
+      - *chmod_permissions
       - run:
           name: Download dependencies
           command: ./gradlew androidDependencies
