@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blackThemeColorPrimary</item>
         <item name="colorPrimaryVariant">@color/blackThemeColorPrimaryVariant</item>
@@ -10,17 +10,5 @@
         <item name="colorSecondary">@color/blackThemeColorSecondary</item>
         <item name="colorSecondaryVariant">@color/blackThemeColorSecondaryVariant</item>
         <item name="colorOnSecondary">@color/black</item>
-    </style>
-
-    <style name="ToolbarStyle">
-        <item name="android:background">@color/main_background</item>
-    </style>
-
-    <style name="BottomNavigationStyle">
-        <item name="android:background">@color/main_background</item>
-    </style>
-
-    <style name="ItemStyle">
-        <item name="android:background">#C1C1C1</item>
     </style>
 </resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--   Light -->
+    <color name="colorPrimary">#FFBB86FC</color>
+    <color name="colorPrimaryVariant">#FF6200EE</color>
+    <color name="colorOnPrimary">#FF3700B3</color>
+    <color name="colorSecondary">#FF018786</color>
+    <color name="colorSecondaryVariant">#FF03DAC5</color>
+    <color name="colorOnSecondary">#FF03DAC5</color>
+
+    <!--  Black -->
+    <color name="blackThemeColorPrimary">#FFBB86FC</color>
+    <color name="blackThemeColorPrimaryVariant">#FF6200EE</color>
+    <color name="blackThemeColorOnPrimary">#FF3700B3</color>
+    <color name="blackThemeColorSecondary">#FF018786</color>
+    <color name="blackThemeColorSecondaryVariant">#FF03DAC5</color>
+    <color name="blackThemeColorOnSecondary">#FF03DAC5</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="toolbar_background">#018006</color>
+    <color name="main_background">#838383</color>
+    <color name="grey">#65676B</color>
+</resources>
+
+
