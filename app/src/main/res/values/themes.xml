@@ -11,16 +11,4 @@
         <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/black</item>
     </style>
-
-    <style name="ToolbarStyle">
-        <item name="android:background">@color/white</item>
-    </style>
-
-    <style name="BottomNavigationStyle">
-        <item name="android:background">@color/white</item>
-    </style>
-
-    <style name="ItemStyle">
-        <item name="android:background">#C1C1C1</item>
-    </style>
 </resources>
